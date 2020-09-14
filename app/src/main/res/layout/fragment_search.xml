@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.altimetric.amdb.viewmodel.SearchViewModel" />
+
+        <variable
+            name="searchQuery"
+            type="com.altimetric.amdb.utils.SearchQuery" />
+
+        <variable
+            name="handler"
+            type="com.altimetric.amdb.view.SearchFragment.Handler" />
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#DAD8D8">
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/search_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="1"
+
+            android:text="@={searchQuery.query}"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/main_result_recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cartitem"
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/search_result_item" />
+
+
+        <ProgressBar
+            android:id="@+id/main_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_edit_text" />
+
+        <ImageView
+            android:id="@+id/search_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->viewModel.getSearchResult(searchQuery.query)}"
+            app:layout_constraintBottom_toBottomOf="@+id/search_edit_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:imeOptions="actionDone"
+            app:layout_constraintTop_toTopOf="@+id/search_edit_text"
+            app:srcCompat="@android:drawable/ic_menu_search" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/sortlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/sorting_type"
+            android:onItemSelected="@{(parent,view,pos,id)-> viewModel.sortListBy(pos)}"
+            app:layout_constraintBottom_toBottomOf="@+id/cartitem"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_edit_text" />
+
+        <Button
+            android:id="@+id/cartitem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{handler::onClick}"
+            android:text="cart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_edit_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

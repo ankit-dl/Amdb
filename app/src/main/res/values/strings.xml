@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Amdb</string>
+    <string-array name="sorting_type">
+        <item>collectionName</item>
+        <item>trackName</item>
+        <item>artistName</item>
+        <item>collectionPrice</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
