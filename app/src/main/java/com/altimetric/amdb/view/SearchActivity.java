@@ -45,5 +45,9 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        viewModel.clean();
+    }
 }

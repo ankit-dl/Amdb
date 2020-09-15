@@ -35,24 +35,21 @@ public class SearchViewModel extends ViewModel {
     }
 
     private MutableLiveData<List<SearchResult>> resultMutableLiveData;
-    public int i = 0;
+
 
     public SearchViewModel(Repository repository) {
         this.repository = repository;
     }
 
-    public LiveData<List<SearchResult>> getSearchResult(String searchQuery) {
-
-        return repository.getSearchResult(searchQuery);
-    }
 
 
     public void sortListBy(int sortBy) {
         resultMutableLiveData = (MutableLiveData<List<SearchResult>>) repository.getSearchLiveDate();
+
         if (resultMutableLiveData == null) return;
         List<SearchResult> data = resultMutableLiveData.getValue();
-        if (data == null) return;
-        Log.i("sort data key", sortBy + "");
+        if (data == null || data.size()<2) return;
+
         Collections.sort(data, (searchResult, t1) -> {
 
             switch (sortBy) {
@@ -77,7 +74,7 @@ public class SearchViewModel extends ViewModel {
 
         });
 
-        // resultMutableLiveData = (MutableLiveData<List<SearchResult>>) repository.getSearchLiveDate();
+
         resultMutableLiveData.setValue(data);
 
     }
@@ -91,12 +88,14 @@ public class SearchViewModel extends ViewModel {
         return repository.getSearchLiveDate();
     }
 
-    public void addToCart(SearchResult result) {
-        {
-            System.out.println(result);
-        }
+    public LiveData<List<SearchResult>> getSearchResult(String searchQuery) {
+
+        return repository.getSearchResult(searchQuery);
+    }
 
 
+    public  void clean(){
+        repository.clean();
     }
 }
 
