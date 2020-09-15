@@ -3,7 +3,6 @@ package com.altimetric.amdb.model;
 import androidx.arch.core.executor.DefaultTaskExecutor;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.altimetric.amdb.model.remote.ApiService;
 import com.altimetric.amdb.model.remote.BaseResult;
@@ -13,19 +12,17 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
 
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.stubbing.OngoingStubbing;
 
 import java.io.IOException;
 
+import okhttp3.Call;
 import okhttp3.Request;
 import okio.Timeout;
-import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
@@ -45,7 +42,7 @@ public class RepositoryTest {
     public InstantTaskExecutorRule executor = new InstantTaskExecutorRule();
 
     @Before
-    public void setUp()  {
+    public void setUp() throws Exception {
         SUT = new Repository(service);
     }
 
@@ -60,6 +57,5 @@ public class RepositoryTest {
         assertNotNull(SUT.getLoadingState());
         assertNotNull(SUT.getLoadingState());
 
-        // assertNull(SUT.getSearchLiveDate());*/
     }
 }
