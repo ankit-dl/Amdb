@@ -46,13 +46,14 @@ public class RepositoryTest {
 
     @Test
     public void test_search() {
-        Mockito.when(service.getSearchResult("test")).thenReturn(new CallTestDouble<>());
-        // Mockito.when().thenReturn(null);
-       // SUT.getLoadingState();
-     //   SUT.getLoadingState();
+          Mockito.when(service.getSearchResult("test")).thenReturn(new CallTestDouble<>());
+        SUT.getSearchResult("test");
+        Mockito.verify(service, Mockito.times(1)).getSearchResult("test");
+   
 
         assertNotNull(SUT.getSearchResult("test"));
-        // assertNull(SUT.getSearchLiveDate());
+        assertNotNull(SUT.getLoadingState());
+        assertNotNull( SUT.getLoadingState());
     }
 }
 
